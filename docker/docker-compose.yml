@@ -1,0 +1,134 @@
+version: "3.9"  
+services:
+  
+  rabbitmq:
+    container_name: RabbitMQ
+    build: ./Infrastructure/RabbitMQ
+    platform: linux/amd64  #<-- For Mac with M1 Chip
+    ports:
+      - "15671:15671"
+      - "15672:15672"
+    networks:
+      - docker-net
+
+  eureka:
+    container_name: Eureka
+    build: ./Infrastructure/Eureka
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+
+  contextmanager:
+    container_name: ContextManager
+    build: ./Infrastructure/ContextManager
+    expose:
+      - "9095"
+    networks:
+      - docker-net
+    depends_on:
+      - rabbitmq
+
+  policymanager:
+    container_name: PolicyManager
+    build: ./Infrastructure/PolicyManager
+    expose:
+      - "9090"
+    networks:
+      - docker-net
+
+  actionperformer:
+    container_name: ActionPerformer
+    build: ./Infrastructure/ActionPerformer
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+    depends_on:
+      - eureka
+
+  camunda:
+    container_name: CamundaServer
+    build: ./Infrastructure/CamundaServer
+    platform: linux/amd64  #<-- For Mac with M1 Chip
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./BPMN:/camunda/configuration/resources"
+    networks:
+      - docker-net
+
+  accesscontroller:
+    container_name: AccessController
+    build: ./ThingGateWays/AccessController
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+    depends_on:
+      - eureka
+
+  ceilinglight:
+    container_name: CeilingLight
+    build: ./ThingGateWays/CeilingLight
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+    depends_on:
+      - eureka
+
+  lamp:
+    container_name: Lamp
+    build: ./ThingGateWays/Lamp
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+    depends_on:
+      - eureka
+
+  medicinedispenser:
+    container_name: MedicineDispenser
+    build: ./ThingGateWays/MedicineDispenser
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+    depends_on:
+      - eureka
+
+  smarttv:
+    container_name: SmartTV
+    build: ./ThingGateWays/SmartTV
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+    depends_on:
+      - eureka
+
+  smartwatch:
+    container_name: SmartWatch
+    build: ./ThingGateWays/SmartWatch
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+    depends_on:
+      - eureka
+
+  videocamera:
+    container_name: VideoCamera
+    build: ./ThingGateWays/VideoCamera
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+    depends_on:
+      - eureka
+
+networks:
+  docker-net:
+    driver: bridge
+
