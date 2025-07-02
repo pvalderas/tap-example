@@ -10,14 +10,24 @@ services:
       - "15672:15672"
     networks:
       - docker-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   eureka:
     container_name: Eureka
     build: ./Infrastructure/Eureka
     expose:
-      - "8080"
+      - "8761"
     networks:
       - docker-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8761"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   contextmanager:
     container_name: ContextManager
@@ -27,7 +37,8 @@ services:
     networks:
       - docker-net
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
 
   policymanager:
     container_name: PolicyManager
@@ -45,7 +56,8 @@ services:
     networks:
       - docker-net
     depends_on:
-      - eureka
+      eureka:
+        condition: service_healthy
 
   camunda:
     container_name: CamundaServer
@@ -65,8 +77,6 @@ services:
       - "8080"
     networks:
       - docker-net
-    depends_on:
-      - eureka
 
   ceilinglight:
     container_name: CeilingLight
@@ -75,8 +85,6 @@ services:
       - "8080"
     networks:
       - docker-net
-    depends_on:
-      - eureka
 
   lamp:
     container_name: Lamp
@@ -85,8 +93,6 @@ services:
       - "8080"
     networks:
       - docker-net
-    depends_on:
-      - eureka
 
   medicinedispenser:
     container_name: MedicineDispenser
@@ -95,8 +101,6 @@ services:
       - "8080"
     networks:
       - docker-net
-    depends_on:
-      - eureka
 
   smarttv:
     container_name: SmartTV
@@ -105,8 +109,6 @@ services:
       - "8080"
     networks:
       - docker-net
-    depends_on:
-      - eureka
 
   smartwatch:
     container_name: SmartWatch
@@ -115,8 +117,6 @@ services:
       - "8080"
     networks:
       - docker-net
-    depends_on:
-      - eureka
 
   videocamera:
     container_name: VideoCamera
@@ -125,8 +125,6 @@ services:
       - "8080"
     networks:
       - docker-net
-    depends_on:
-      - eureka
 
 networks:
   docker-net:

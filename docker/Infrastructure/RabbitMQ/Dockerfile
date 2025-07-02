@@ -1,5 +1,7 @@
 FROM rabbitmq:4.0
 
+RUN apt-get -y update; apt-get -y install curl
+
 RUN set -eux; \
 	rabbitmq-plugins enable --offline rabbitmq_management; \
 # make sure the metrics collector is re-enabled (disabled in the base image for Prometheus-style metrics by default)

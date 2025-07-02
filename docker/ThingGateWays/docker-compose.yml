@@ -1,0 +1,65 @@
+version: "3.9"  
+services:
+  
+  accesscontroller:
+    container_name: AccessController
+    build: ./AccessController
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+
+  ceilinglight:
+    container_name: CeilingLight
+    build: ./CeilingLight
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+
+  lamp:
+    container_name: Lamp
+    build: ./Lamp
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+
+  medicinedispenser:
+    container_name: MedicineDispenser
+    build: ./MedicineDispenser
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+
+  smarttv:
+    container_name: SmartTV
+    build: ./SmartTV
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+
+  smartwatch:
+    container_name: SmartWatch
+    build: ./SmartWatch
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+
+
+  videocamera:
+    container_name: VideoCamera
+    build: ./VideoCamera
+    expose:
+      - "8080"
+    networks:
+      - docker-net
+
+
+networks:
+  docker-net:
+    driver: bridge
+
