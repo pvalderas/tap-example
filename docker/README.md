@@ -1,5 +1,3 @@
-# Running the example
-
 # Create the Docker containers:
 
 ```
@@ -24,9 +22,9 @@ After containers are running you can trigger the Welcome process by injecting th
 
  **Please note that:**
 
-* Only the user pvaldera has usage policies defined
+* Only the user pvalderas has defined usage policies
 * The first time the process is run, both the lamp and the ceiling light are turned on. In subsequent runs, only the ceiling light is used, as pvalderas can only use the Lamp's Turns On operation once.
-* In every process run, the task 'Talk with Patient' must be completed from the Camunda dashboard using the following URL: 
+* In each process run, the 'Talk to Patient' task must be completed from the Camunda dashboard using the following URL: 
 ```
 http://localhost:8080/camunda/app/tasklist/default/#/login
 ```
