@@ -12,7 +12,7 @@ Once containers are executed, you can check the Elder People Tap is deployed in 
 http://localhost:8080/camunda/app/cockpit/default/#/login
 ```
 
-# Executing a process
+# Execute a process:
 
 After containers are running you can trigger the Welcome process by injecting the 'Presence Detected' event throght the Camunda REST API. You can use the curl tool from the Camunda docker container terminal or use any REST client from the local machine.
 
