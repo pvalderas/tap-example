@@ -6,6 +6,6 @@ This example was developed by Pedro Valderas at the PROS Research Center, VRAIN 
 
 # Content
 
-* infrastructure: this folder contains the source code of the projects that implements the infrastructure microservices.
-* thing-gateways: this folder contains the source code of the projects that implements the thing-gateways microservices.
-* docker: this folder contains a dockerized executable version of the example
+* infrastructure: this folder contains the source code of the projects that implement the infrastructure microservices.
+* thing-gateways: this folder contains the source code of the projects that implement the thing-gateways microservices.
+* docker: this folder contains a dockerized executable version of the example.
