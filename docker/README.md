@@ -4,7 +4,7 @@
 docker compose up
 ```
 
-**Please note** that Camunda port 8080 is mapped to the same port on the local machine, so please check that it is not being used by another application..
+**Please note that** Camunda port 8080 is mapped to the same port on the local machine, so please check that it is not being used by another application..
 
 Once containers are executed, you can check the Elder People Tap is deployed in the Camunda server by connecting with the user/pass (demo/demo) to:
 
